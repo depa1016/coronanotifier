@@ -4,7 +4,7 @@
   "description": "An app that automatically notifies people who had been recently in contact with persons that have been tested positively for covid-19.",
   "main": "notifierapp.js",
   "scripts": {
-    "start": "node index",
+    "start": "node notifierapp.js",
     "dev": "nodemon index"
   },
   "author": "Patrick Deck",
