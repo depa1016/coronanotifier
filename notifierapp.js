@@ -12,4 +12,4 @@ app.get('/api/members', (req,res) => {
 
 
 
-app.listen(port, () => console.log(`server listening at http://localhost: ${port} `));
+app.listen(process.env.PORT || port, () => console.log(`server listening at http://localhost: ${port} `));
