@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 
     for (var i = 0; i < 10; i++) {
       stmt.run('Ipsum ' + i);
+      console.log('ipsum bla')
     }
 
     stmt.finalize();
