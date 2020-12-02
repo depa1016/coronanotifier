@@ -20,16 +20,35 @@ var html = '<h1>Coronanotifier</h1> Die folgenden Personen wurden benachrichtigt
 
 //HTTP Funktionen
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-  console.log("Get Request durchgeführt")
+  console.log('get ausgeführt')
+  html = '<h1>Coronanotifier</h1> Die folgenden Personen wurden benachrichtigt: <p>'
+
+  db.all('select * from contactpeopletable', [], (err, rows) => {
+  if (err) {
+    throw err;
+  }
+  html = html.concat("<style>table, td, th {border: 1px solid black;}table {width: 100%;border-collapse: collapse;}</style>")
+  html = html.concat("<p><table>")
+  html = html.concat("<tr><th>Vorname</th><th>Nachname</th><th>Land</th><th>Stadt</th><th>Postleitzahl</th><th>Straße</th><th>Hausnummer</th><th>E-Mail</th><th>Festnetz</th><th>Mobil</th><th>Arbeit</th></tr>")
+  rows.forEach((row) => {
+    console.log(row.contact_firstname);
+    html = html.concat("<tr><td>"+row.contact_firstname+"</td><td>"+row.contact_lastname+"</td><td>"+row.contact_address_country+"</td><td>"+row.contact_address_city+"</td><td>"+row.contact_address_plz+"</td><td>"+row.contact_address_street+"</td><td>"+row.contact_address_housenumber+"</td><td>"+row.contact_mail_address+"</td><td>"+row.contact_telephone_number_1+"</td><td>"+row.contact_telephone_number_2+"</td><td>"+row.contact_telephone_number_3+"</td></tr>")
+  });
+  });
+  html = html.concat("</table>")
+  setTimeout(function() {
+  //your code to be executed after 1 second
+  res.send(html)
+}, 100);
+
+
 })
 
 
 //HTTP Post
 app.post('/notify', (req, res) => {
-  console.log("post request unter /notify ")
+  //handle the possibility of only one contactperson -> in this case modify json to fit logic
   var jsonContainsMultipleElements = JSON.stringify(req.body).startsWith("[")
-  console.log(jsonContainsMultipleElements)
   if(!jsonContainsMultipleElements) {
     var newReqBody = JSON.stringify(req.body)
     newReqBody = newReqBody.concat("]")
