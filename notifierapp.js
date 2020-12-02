@@ -90,13 +90,14 @@ app.get('/', (req, res) => {
 
       html = html.concat("</tr>")
     });
+    html = html.concat("</table>")
     });
   })
   console.log('get ausgeführt')
-  html = '<h1>Coronanotifier</h1> Die folgenden Personen wurden benachrichtigt: <p>'
 
 
-  html = html.concat("</table>")
+
+
   setTimeout(function() {
   //your code to be executed after 1 second
   res.send(html)
