@@ -32,75 +32,66 @@ app.get('/', (req, res) => {
     rows.forEach((row) => {
       console.log(row.contact_firstname);
       html = html.concat("<tr>")
-      "<td>"+row.contact_firstname+"</td><td>"+row.contact_lastname+"</td><td>"+row.contact_address_country+"</td><td>"+row.contact_address_city+"</td><td>"+row.contact_address_plz+"</td><td>"+row.contact_address_street+"</td><td>"+row.contact_address_housenumber+"</td><td>"+row.contact_mail_address+"</td><td>"+row.contact_telephone_number_1+"</td><td>"+row.contact_telephone_number_2+"</td><td>"+row.contact_telephone_number_3+"</td></tr>")
       if(row.contact_firstname) {
           html = html.concat("<td>"+row.contact_firstname+"</td>")
       } else {
-          html = html.concat("<td></td>)
+          html = html.concat("<td></td>")
       }
       if(row.contact_lastname) {
           html = html.concat("<td>"+row.contact_lastname+"</td>")
       } else {
-          html = html.concat("<td></td>)
+          html = html.concat("<td></td>")
       }
       if(row.contact_address_country) {
           html = html.concat("<td>"+row.contact_address_country+"</td>")
       } else {
-          html = html.concat("<td></td>)
+          html = html.concat("<td></td>")
       }
       if(row.contact_address_city) {
           html = html.concat("<td>"+row.contact_address_city+"</td>")
       } else {
-          html = html.concat("<td></td>)
+          html = html.concat("<td></td>")
       }
       if(row.contact_address_plz) {
           html = html.concat("<td>"+row.contact_address_plz+"</td>")
       } else {
-          html = html.concat("<td></td>)
+          html = html.concat("<td></td>")
       }
       if(row.contact_address_street) {
           html = html.concat("<td>"+row.contact_address_street+"</td>")
       } else {
-          html = html.concat("<td></td>)
+          html = html.concat("<td></td>")
       }
       if(row.contact_address_housenumber) {
           html = html.concat("<td>"+row.contact_address_housenumber+"</td>")
       } else {
-          html = html.concat("<td></td>)
+          html = html.concat("<td></td>")
       }
       if(row.contact_mail_address) {
           html = html.concat("<td>"+row.contact_mail_address+"</td>")
       } else {
-          html = html.concat("<td></td>)
+          html = html.concat("<td></td>")
       }
       if(row.contact_telephone_number_1) {
           html = html.concat("<td>"+row.contact_telephone_number_1+"</td>")
       } else {
-          html = html.concat("<td></td>)
+          html = html.concat("<td></td>")
       }
       if(row.contact_telephone_number_2) {
           html = html.concat("<td>"+row.contact_telephone_number_2+"</td>")
       } else {
-          html = html.concat("<td></td>)
+          html = html.concat("<td></td>")
       }
       if(row.contact_telephone_number_3) {
           html = html.concat("<td>"+row.contact_telephone_number_3+"</td>")
       } else {
-          html = html.concat("<td></td>)
+          html = html.concat("<td></td>")
       }
 
-
       html = html.concat("</tr>")
-
-
-
-
-
     });
     });
-
-
-  }
+  })
   console.log('get ausgeführt')
   html = '<h1>Coronanotifier</h1> Die folgenden Personen wurden benachrichtigt: <p>'
 
