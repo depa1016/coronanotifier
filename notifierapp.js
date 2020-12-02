@@ -16,15 +16,15 @@ let db = new sqlite3.Database(':memory:', sqlite3.OPEN_READWRITE, (err) => {
 //Um JSON Files zu handlen
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-var html = '<h1>Coronanotifier</h1> Die folgenden Personen wurden benachrichtigt: <p>'
-
+var html = '<h1>Coronanotifier</h1> Die folgenden Personen sind in der Datenbank: <p>'
+var html2 = '<h1>Coronanotifier</h1> Die folgenden Personen wurden benachrichtigt: <p>'
 //HTTP Funktionen
 app.get('/', (req, res) => {
   db.serialize(function() {
     db.run('CREATE TABLE if not exists contactpeopletable (contact_firstname TEXT, contact_lastname TEXT, contact_address_country TEXT, contact_address_city TEXT, contact_address_plz INTEGER, contact_address_street TEXT, contact_address_housenumber INTEGER, contact_mail_address TEXT UNIQUE, contact_telephone_number_1 TEXT, contact_telephone_number_2 TEXT, contact_telephone_number_3 TEXT, contact_has_been_notified INTEGER)');
     db.all('select * from contactpeopletable', [], (err, rows) => {
     if (err) {
-      html = html.concat("Die Tabelle wurde noch nicht angelegt.")
+
     }
     html = html.concat("<style>table, td, th {border: 1px solid black;}table {width: 100%;border-collapse: collapse;}</style>")
     html = html.concat("<p><table>")
@@ -128,23 +128,23 @@ app.post('/notify', (req, res) => {
            console.log("successfully inserted data")
          }
        });
-       html = html.concat("<li>" + cperson.contact_firstname + " " + cperson.contact_lastname + " wurde über folgende Wege kontaktiert: <p><table style='width:50%;border-collapse:collapse;border:1px solid black;'>");
+       html2 = html2.concat("<li>" + cperson.contact_firstname + " " + cperson.contact_lastname + " wurde über folgende Wege kontaktiert: <p><table style='width:50%;border-collapse:collapse;border:1px solid black;'>");
        if(cperson.contact_mail_address){
-         html = html.concat("<tr><td>E-Mail</td><td>"+cperson.contact_mail_address+"</td></tr>")
+         html2 = html2.concat("<tr><td>E-Mail</td><td>"+cperson.contact_mail_address+"</td></tr>")
        }
        if(cperson.contact_telephone_number_1){
-         html = html.concat("<tr><td>Festnetz</td><td>"+cperson.contact_telephone_number_1+"</td></tr>")
+         html2 = html2.concat("<tr><td>Festnetz</td><td>"+cperson.contact_telephone_number_1+"</td></tr>")
        }
        if(cperson.contact_telephone_number_2){
-         html = html.concat("<tr><td>Mobil</td><td>"+cperson.contact_telephone_number_2+"</td></tr>")
+         html2 = html2.concat("<tr><td>Mobil</td><td>"+cperson.contact_telephone_number_2+"</td></tr>")
        }
        if(cperson.contact_telephone_number_3){
-         html = html.concat("<tr><td>Arbeit</td><td>"+cperson.contact_telephone_number_3+"</td></tr>")
+         html2 = html2.concat("<tr><td>Arbeit</td><td>"+cperson.contact_telephone_number_3+"</td></tr>")
        }
-       html = html.concat("</table>")
+       html2 = html2.concat("</table>")
     }}
   )
-  res.send(html);
+  res.send(html2);
 
 });
 
