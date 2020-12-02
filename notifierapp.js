@@ -16,7 +16,7 @@ let db = new sqlite3.Database(':memory:', sqlite3.OPEN_READWRITE, (err) => {
 //Um JSON Files zu handlen
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-var html = '<h1>Coronanotifier</h1> Die folgenden Personen sind in der Datenbank: <p>'
+
 var html2 = '<h1>Coronanotifier</h1> Die folgenden Personen wurden benachrichtigt: <p>'
 //HTTP Funktionen
 app.get('/', (req, res) => {
@@ -26,6 +26,7 @@ app.get('/', (req, res) => {
     if (err) {
 
     }
+    var html = '<h1>Coronanotifier</h1> Die folgenden Personen sind in der Datenbank: <p>'
     html = html.concat("<style>table, td, th {border: 1px solid black;}table {width: 100%;border-collapse: collapse;}</style>")
     html = html.concat("<p><table>")
     html = html.concat("<tr><th>Vorname</th><th>Nachname</th><th>Land</th><th>Stadt</th><th>Postleitzahl</th><th>Straße</th><th>Hausnummer</th><th>E-Mail</th><th>Festnetz</th><th>Mobil</th><th>Arbeit</th></tr>")
