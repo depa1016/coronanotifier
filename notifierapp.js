@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
 //HTTP Post
 app.post('/notify', (req, res) => {
-  console.log("post request unter /notify")
+  console.log("post request unter /notify ")
   //Ininitalisiere DB und erstelle Table falls er noch nicht existiert
   db.serialize(function() {
      db.run('CREATE TABLE if not exists contactpeopletable (contact_firstname TEXT, contact_lastname TEXT, contact_address_country TEXT, contact_address_city TEXT, contact_address_plz INTEGER, contact_address_street TEXT, contact_address_housenumber INTEGER, contact_mail_address TEXT UNIQUE, contact_telephone_number_1 TEXT, contact_telephone_number_2 TEXT, contact_telephone_number_3 TEXT, contact_has_been_notified INTEGER)');
