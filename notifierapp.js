@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 
   db.all('select * from contactpeopletable', [], (err, rows) => {
   if (err) {
-    throw err;
+    html = html.concat("Die Tabelle wurde noch nicht angelegt.")
   }
   html = html.concat("<style>table, td, th {border: 1px solid black;}table {width: 100%;border-collapse: collapse;}</style>")
   html = html.concat("<p><table>")
@@ -36,8 +36,10 @@ app.get('/', (req, res) => {
   });
   });
   html = html.concat("</table>")
-
+  setTimeout(function() {
+  //your code to be executed after 1 second
   res.send(html)
+}, 100);
 
 })
 
