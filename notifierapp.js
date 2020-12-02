@@ -36,11 +36,8 @@ app.get('/', (req, res) => {
   });
   });
   html = html.concat("</table>")
-  setTimeout(function() {
-  //your code to be executed after 1 second
-  res.send(html)
-}, 100);
 
+  res.send(html)
 
 })
 
