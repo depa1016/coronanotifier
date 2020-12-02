@@ -93,17 +93,8 @@ app.get('/', (req, res) => {
     });
     html = html.concat("</table>")
     });
+    res.send(html)
   })
-  console.log('get ausgeführt')
-
-
-
-
-  setTimeout(function() {
-  //your code to be executed after 1 second
-  res.send(html)
-}, 100);
-
 })
 
 
