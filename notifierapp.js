@@ -20,21 +20,27 @@ var html = '<h1>Coronanotifier</h1> Die folgenden Personen wurden benachrichtigt
 
 //HTTP Funktionen
 app.get('/', (req, res) => {
+  db.serialize(function() {
+    db.run('CREATE TABLE if not exists contactpeopletable (contact_firstname TEXT, contact_lastname TEXT, contact_address_country TEXT, contact_address_city TEXT, contact_address_plz INTEGER, contact_address_street TEXT, contact_address_housenumber INTEGER, contact_mail_address TEXT UNIQUE, contact_telephone_number_1 TEXT, contact_telephone_number_2 TEXT, contact_telephone_number_3 TEXT, contact_has_been_notified INTEGER)');
+    db.all('select * from contactpeopletable', [], (err, rows) => {
+    if (err) {
+      html = html.concat("Die Tabelle wurde noch nicht angelegt.")
+    }
+    html = html.concat("<style>table, td, th {border: 1px solid black;}table {width: 100%;border-collapse: collapse;}</style>")
+    html = html.concat("<p><table>")
+    html = html.concat("<tr><th>Vorname</th><th>Nachname</th><th>Land</th><th>Stadt</th><th>Postleitzahl</th><th>Straße</th><th>Hausnummer</th><th>E-Mail</th><th>Festnetz</th><th>Mobil</th><th>Arbeit</th></tr>")
+    rows.forEach((row) => {
+      console.log(row.contact_firstname);
+      html = html.concat("<tr><td>"+row.contact_firstname+"</td><td>"+row.contact_lastname+"</td><td>"+row.contact_address_country+"</td><td>"+row.contact_address_city+"</td><td>"+row.contact_address_plz+"</td><td>"+row.contact_address_street+"</td><td>"+row.contact_address_housenumber+"</td><td>"+row.contact_mail_address+"</td><td>"+row.contact_telephone_number_1+"</td><td>"+row.contact_telephone_number_2+"</td><td>"+row.contact_telephone_number_3+"</td></tr>")
+    });
+    });
+
+
+  }
   console.log('get ausgeführt')
   html = '<h1>Coronanotifier</h1> Die folgenden Personen wurden benachrichtigt: <p>'
 
-  db.all('select * from contactpeopletable', [], (err, rows) => {
-  if (err) {
-    html = html.concat("Die Tabelle wurde noch nicht angelegt.")
-  }
-  html = html.concat("<style>table, td, th {border: 1px solid black;}table {width: 100%;border-collapse: collapse;}</style>")
-  html = html.concat("<p><table>")
-  html = html.concat("<tr><th>Vorname</th><th>Nachname</th><th>Land</th><th>Stadt</th><th>Postleitzahl</th><th>Straße</th><th>Hausnummer</th><th>E-Mail</th><th>Festnetz</th><th>Mobil</th><th>Arbeit</th></tr>")
-  rows.forEach((row) => {
-    console.log(row.contact_firstname);
-    html = html.concat("<tr><td>"+row.contact_firstname+"</td><td>"+row.contact_lastname+"</td><td>"+row.contact_address_country+"</td><td>"+row.contact_address_city+"</td><td>"+row.contact_address_plz+"</td><td>"+row.contact_address_street+"</td><td>"+row.contact_address_housenumber+"</td><td>"+row.contact_mail_address+"</td><td>"+row.contact_telephone_number_1+"</td><td>"+row.contact_telephone_number_2+"</td><td>"+row.contact_telephone_number_3+"</td></tr>")
-  });
-  });
+
   html = html.concat("</table>")
   setTimeout(function() {
   //your code to be executed after 1 second
