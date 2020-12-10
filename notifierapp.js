@@ -24,9 +24,7 @@ app.get('/', (req, res) => {
   db.serialize(function() {
     db.run('CREATE TABLE if not exists contactpeopletable (contact_firstname TEXT, contact_lastname TEXT, contact_address_country TEXT, contact_address_city TEXT, contact_address_plz INTEGER, contact_address_street TEXT, contact_address_housenumber INTEGER, contact_mail_address TEXT UNIQUE, contact_telephone_number_1 TEXT, contact_telephone_number_2 TEXT, contact_telephone_number_3 TEXT, contact_has_been_notified INTEGER)');
     db.all('select * from contactpeopletable', [], (err, rows) => {
-    if (err) {
-
-    }
+    if (err) {}
     html = html.concat("<style>table, td, th {border: 1px solid black;}table {width: 100%;border-collapse: collapse;}</style>")
     html = html.concat("<p><table>")
     html = html.concat("<tr><th>Vorname</th><th>Nachname</th><th>Land</th><th>Stadt</th><th>Postleitzahl</th><th>Straße</th><th>Hausnummer</th><th>E-Mail</th><th>Festnetz</th><th>Mobil</th><th>Arbeit</th></tr>")
